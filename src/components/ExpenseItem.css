@@ -1,7 +1,4 @@
 .expense-item {
-  background-color: orange;
-}
-.expense-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
