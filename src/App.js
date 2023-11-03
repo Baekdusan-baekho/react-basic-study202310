@@ -1,57 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Expenses from './components/Expenses/Expenses';
-import Hello from './components/Hello';
+// import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
+import CourseInput from './components/CourseGoals/CourseInput';
+import CourseList from './components/CourseGoals/CourseList';
 
 // 함수명은 파일명으로 지정하는 것이 정석
 const App = () => {
-  // 지출 항목 객체 배열
-
-  const expenses = [
-    {
-      title: '바나나',
-      price: 2000,
-      date: new Date(2023, 3 - 1, 23),
-    },
-    {
-      title: 'BBQ치킨',
-      price: 20000,
-      date: new Date(2023, 5 - 1, 21),
-    },
-    {
-      title: '도미노피자',
-      price: 35000,
-      date: new Date(2023, 7 - 1, 4),
-    },
-    {
-      title: '엽기떡볶이',
-      price: 17000,
-      date: new Date(2023, 3 - 1, 28),
-    },
-  ];
-
-  console.log('App 실행~');
-
-  // ExpenseForm에게 내려보낼 함수
-  const addExpenseHandler = (newExpense) => {
-    console.log('App 컴포넌트에서 응답함!');
-    console.log(newExpense);
-  };
-
   return (
-    <>
-      <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} />
-      {/* <Hello>
-        <ul>
-          <li>사과</li>
-          <li>포도</li>
-          <li>복숭아</li>
-        </ul>
-      </Hello> */}
-    </>
+    <div>
+      <section id='goal-form'>
+        <CourseInput />
+      </section>
+      <section id='goals'>
+        <CourseList />
+      </section>
+    </div>
   );
 };
 
 export default App;
+
+//  바뀐것이 인식되어야 한다.
+// 스프레드 useState훅 사용
+
+// // 지출 항목 객체 배열
+// const expenses = [
+//   {
+//     id: 1,
+//     title: '바나나',
+//     price: 20000,
+//     date: new Date(2023, 3 - 1, 23),
+//   },
+//   {
+//     id: 2,
+//     title: 'BBQ치킨',
+//     price: 20000,
+//     date: new Date(2022, 5 - 1, 21),
+//   },
+//   {
+//     id: 3,
+//     title: '도미노피자',
+//     price: 35000,
+//     date: new Date(2023, 7 - 1, 4),
+//   },
+//   {
+//     id: 4,
+//     title: '엽기떡볶이',
+//     price: 17000,
+//     date: new Date(2021, 3 - 1, 28),
+//   },
+// ];
+
+// // 지출 객체배열을 상태변수로 관리
+// const [expenseList, setExpenseList] = useState(expenses);
+
+// console.log('App 실행~');
+
+// // ExpenseForm에게 내려보낼 함수
+// const addExpenseHandler = (newExpense) => {
+//   console.log('App 컴포넌트에서 응답함!');
+//   console.log(newExpense);
+
+//   const modifyExpense = {
+//     ...newExpense,
+//     id: expenseList[expenseList.length - 1].id + 1,
+//   };
+//   console.log(modifyExpense);
+//   setExpenseList([...expenseList, modifyExpense]);
+//   console.log(expenseList);
+// };
+
+// return (
+//   <>
+//     <NewExpense onAddExpense={addExpenseHandler} />
+//     <Expenses items={expenseList} />
+//     {/* <Hello>
+//       <ul>
+//         <li>사과</li>
+//         <li>포도</li>
+//         <li>복숭아</li>
+//       </ul>
+//     </Hello> */}
+//   </>
+// );
