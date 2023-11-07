@@ -1,17 +1,101 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AddUsers from './components/Users/AddUsers';
 import UserList from './components/Users/UserList';
+import MainHeader from './components/SideEffect/MainHeader/MainHeader';
+import Home from './components/SideEffect/Home/Home';
+import Login from './components/SideEffect/Login/Login';
 
 const App = () => {
+  // 로그인 상태를 관리하는 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // 화면이 리렌더링 될 때 localStorage를 확인해서
+  // 현재 login-flag가 존재하는지 검사.
+  console.log('로그인 검사 수행'); //렌더링 될 때마다 실행
+
+  // 목표: 기존에 로그인 한 사람인지 확인하는 코드는
+  //       리렌더링 될 때마다 실행되면 안됨! useeffect가 리렌더링 안되게 해줌
+  useEffect(() => {
+    console.log('useEffect 실행! - 최초 단 한번만 실행됨!');
+    const storedLoginFlag = localStorage.getItem('login-flag');
+    if (storedLoginFlag === '1') {
+      setIsLoggedIn(true);
+    }
+  }, []); // 첫번째 매개값 (함수) 두번째 매개값 (배열)
+
+  // 서버로 로그인을 요청하는 함수 (나중에는 fetch를 통한 백엔드와의 연계가 필요.)
+  const loginHandler = (email, password) => {
+    // 로그인을 했다는 증거로 상태값 변경 및 브라우저에 로그인 값을 1로 표현해서 저장.
+    localStorage.setItem('login-flag', '1');
+    setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem('login-flag');
+    setIsLoggedIn(false);
+  };
+
   return (
-    <div>
-      <AddUsers />
-      <UserList />
-    </div>
+    <>
+      <MainHeader
+        isAuthenticated={isLoggedIn}
+        onLogout={logoutHandler}
+      />
+      <main>
+        {isLoggedIn && <Home />}
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+      </main>
+    </>
   );
 };
 
 export default App;
+
+//
+//
+//
+// const [userList, setUserList] = useState([]); //아무것도 없는 빈 배열
+
+// //  자식이 부모에게 데이터를 보낸다 부모는 자식이 선언할 수 있게 함수를 만든다
+// const addUserHandler = (user) => {
+//   console.log(user);
+// eslint-disable-next-line max-len
+//   setUserList((prev) => [...prev, { ...user, id: Math.random().toString() }]);
+// };
+
+// return (
+// <div>
+//   <AddUsers onAddUser={addUserHandler} />
+//   <UserList users={userList} />
+// </div>
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // import React, { useState } from 'react';
 // import './App.css';

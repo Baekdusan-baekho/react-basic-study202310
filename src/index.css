@@ -11,6 +11,10 @@ body {
   background: #1c1c1c;
 }
 
+main {
+  margin-top: 6rem;
+}
+
 /* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
