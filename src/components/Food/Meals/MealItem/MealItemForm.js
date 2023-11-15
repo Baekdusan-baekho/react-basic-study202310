@@ -3,7 +3,8 @@ import Input from '../../../UI/Input/Input';
 import styles from './MealItemForm.module.scss';
 
 const MealItemForm = ({ id, onAddToCart }) => {
-  const [amount, setAmount] = useState(0);
+  // 수량의 상태를 관리하는 변수.
+  const [amount, setAmount] = useState(1);
 
   // 담기 버튼을 누르면 발동하는 함수.
   const formSubmitHandler = (e) => {
